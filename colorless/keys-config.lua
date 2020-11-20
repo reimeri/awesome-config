@@ -358,7 +358,7 @@ function hotkeys:init(args)
 			{ description = "Show main menu", group = "Widgets" }
 		},
 		{
-			{ env.mod }, "space", function() os.execute("rofi -show") end,
+			{ env.mod }, "space", function() os.execute("rofi -show run") end,
 			{ description = "Application launcher", group = "Widgets" }
 		},
 		{
