@@ -7,6 +7,8 @@ local awful = require("awful")
 
 local redflat = require("redflat")
 
+local naughty = require("naughty")
+
 -- Initialize tables and vars for module
 -----------------------------------------------------------------------------------------------------------------------
 local hotkeys = { mouse = {}, raw = {}, keys = {}, fake = {} }
@@ -372,6 +374,38 @@ function hotkeys:init(args)
 		{
 			{ env.mod }, "F3", function() redflat.float.qlaunch:show() end,
 			{ description = "Application quick launcher", group = "Main" }
+		},
+		{
+			{ env.mod }, "equal", 
+			function() awful.spawn.easy_async(
+				"amixer set Master -M 1%+",
+				function(stdout, stderr, reason, exit_code)
+					naughty.notify { 
+						text = string.match(stdout, "([%d]+)%%.*%[([%l]*)"),
+						title = "Volume",
+						timeout = 1,
+						height = 65,
+						width = 100,
+					}
+				end)
+		 	end,
+			{ description = "Volume up", group = "Sound" }
+		},
+		{
+			{ env.mod }, "minus", 
+			function() awful.spawn.easy_async(
+				"amixer set Master -M 1%-",
+				function(stdout, stderr, reason, exit_code)
+					naughty.notify { 
+						text = string.match(stdout, "([%d]+)%%.*%[([%l]*)"),
+						title = "Volume",
+						timeout = 1,
+						height = 65,
+						width = 100,
+					}
+				end)
+		 	end,
+			{ description = "Volume up", group = "Sound" }
 		},
 
 		-- {
