@@ -179,3 +179,11 @@ titlebar:init()
 -----------------------------------------------------------------------------------------------------------------------
 local signals = require("colorless.signals-config") -- load file with signals configuration
 signals:init({ env = env })
+
+
+-- Autostart user applications
+-----------------------------------------------------------------------------------------------------------------------
+if redflat.startup.is_startup then
+	local autostart = require("colorless.autostart-config") -- load file with autostart application list
+	autostart.run()
+end
