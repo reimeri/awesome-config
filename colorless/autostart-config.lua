@@ -13,7 +13,7 @@ local autostart = {}
 --------------------------------------------------------------------------------
 function autostart.run()
     -- Resolution
-	awful.spawn.with_shell("xrandr --auto --output HDMI-2 --mode 2560x1440 --output DP-5 --mode 3440x1440 --rate 74.98 --left-of HDMI-2")
+	awful.spawn.with_shell("xrandr --auto --output HDMI-A-1 --mode 2560x1440 --output DisplayPort-2 --mode 3440x1440 --rate 74.98 --left-of HDMI-A-1")
 end
 
 -- Read and commands from file and spawn them
