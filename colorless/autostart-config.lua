@@ -12,8 +12,10 @@ local autostart = {}
 -- Application list function
 --------------------------------------------------------------------------------
 function autostart.run()
-    -- Resolution
-	awful.spawn.with_shell("xrandr --auto --output HDMI-A-1 --mode 2560x1440 --output DisplayPort-2 --mode 3440x1440 --rate 74.98 --left-of HDMI-A-1")
+	-- Resolution
+	awful.spawn.with_shell("xrandr --auto --output HDMI-A-1 --mode 2560x1440 --pos 3440x0")
+	-- Main monitor display port number changes randomly
+	-- awful.spawn.with_shell("xrandr --auto --output HDMI-A-1 --mode 2560x1440 --output DisplayPort-2 --mode 3440x1440 --rate 74.98 --left-of HDMI-A-1")
 end
 
 -- Read and commands from file and spawn them
