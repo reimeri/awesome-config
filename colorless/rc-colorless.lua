@@ -114,8 +114,27 @@ kbindicator.buttons = awful.util.table.join(
 
 -- Alsa widget
 --------------------------------------------------------------------------------
-local alsasound = {}
-alsasound.widget = redflat.widget.alsasound()
+-- local alsasound = {}
+-- alsasound.widget = redflat.widget.alsasound()
+
+
+-- PA volume control
+--------------------------------------------------------------------------------
+local volume = {}
+volume.widget = redflat.widget.pulse(nil, { widget = redflat.gauge.audio.blue.new })
+
+-- activate player widget
+redflat.float.player:init({ name = env.player })
+
+volume.buttons = awful.util.table.join(
+	awful.button({}, 4, function() volume.widget:change_volume()                end),
+	awful.button({}, 5, function() volume.widget:change_volume({ down = true }) end),
+	awful.button({}, 2, function() volume.widget:mute()                         end),
+	awful.button({}, 3, function() redflat.float.player:show()                  end),
+	awful.button({}, 1, function() redflat.float.player:action("PlayPause")     end),
+	awful.button({}, 8, function() redflat.float.player:action("Previous")      end),
+	awful.button({}, 9, function() redflat.float.player:action("Next")          end)
+)
 
 -- Screen setup
 -----------------------------------------------------------------------------------------------------------------------
@@ -164,11 +183,11 @@ awful.screen.connect_for_each_screen(
 				separator,
 				env.wrapper(layoutbox[s], "layoutbox", layoutbox.buttons),
 				separator,
-				env.wrapper(alsasound.widget, "alsasound"),
+				env.wrapper(kbindicator.widget, "keyboard", kbindicator.buttons),
+				separator,
+				env.wrapper(volume.widget, "volume", volume.buttons),
 				separator,
 				env.wrapper(textclock.widget, "textclock"),
-				separator,
-				env.wrapper(kbindicator.widget, "keyboard", kbindicator.buttons),
 				separator,
 				env.wrapper(tray.widget, "tray", tray.buttons),
 			},

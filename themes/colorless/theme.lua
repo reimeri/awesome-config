@@ -525,6 +525,7 @@ function theme:init()
 		textclock   = { 12, 12, 0, 0 },
 		keyboard	= { 6, 6, 4, 4 },
 		alsasound	= { 6, 6, 0, 0 },
+		volume      = { 4, 9, 3, 3 },
 		taglist     = { 4, 4, 0, 0 },
 		tray        = { 10, 12, 7, 7 },
 		-- tasklist    = { 0, 70, 0, 0 }, -- centering tasklist widget
@@ -590,6 +591,14 @@ function theme:init()
 		widget = nil, -- audio gauge (usually setted by rc file)
 		audio  = {}   -- style for gauge
 	}
+
+	-- Pulseaudio additional settings
+	theme.gauge.audio.blue.dash.plain = true
+	theme.gauge.audio.blue.dash.bar.num = 10
+	theme.gauge.audio.blue.dash.bar.width = 2
+	theme.gauge.audio.blue.dmargin = { 5, 5, 9, 9 }
+	theme.gauge.audio.blue.width = 80
+	theme.gauge.audio.blue.icon = self.base .. "/widget/audio.svg"
 
 	-- Keyboard layout indicator
 	------------------------------------------------------------

@@ -44,7 +44,7 @@ end
 
 local change_volume_default_args = {
 	down        = false,
-	step        = math.floor(65536 / 100 * 5 + 0.5),
+	step        = math.floor(65536 / 100 * 1 + 0.5),
 	show_notify = false
 }
 
