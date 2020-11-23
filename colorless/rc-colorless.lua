@@ -100,6 +100,22 @@ tray.buttons = awful.util.table.join(
 	awful.button({}, 1, function() redflat.widget.minitray:toggle() end)
 )
 
+-- Keyboard layout indicator
+--------------------------------------------------------------------------------
+local kbindicator = {}
+redflat.widget.keyboard:init({ "English", "Finnish" })
+kbindicator.widget = redflat.widget.keyboard()
+
+kbindicator.buttons = awful.util.table.join(
+	awful.button({}, 1, function () redflat.widget.keyboard:toggle_menu() end),
+	awful.button({}, 4, function () redflat.widget.keyboard:toggle()      end),
+	awful.button({}, 5, function () redflat.widget.keyboard:toggle(true)  end)
+)
+
+-- Alsa widget
+--------------------------------------------------------------------------------
+local alsasound = {}
+alsasound.widget = redflat.widget.alsasound()
 
 -- Screen setup
 -----------------------------------------------------------------------------------------------------------------------
@@ -148,7 +164,11 @@ awful.screen.connect_for_each_screen(
 				separator,
 				env.wrapper(layoutbox[s], "layoutbox", layoutbox.buttons),
 				separator,
+				env.wrapper(alsasound.widget, "alsasound"),
+				separator,
 				env.wrapper(textclock.widget, "textclock"),
+				separator,
+				env.wrapper(kbindicator.widget, "keyboard", kbindicator.buttons),
 				separator,
 				env.wrapper(tray.widget, "tray", tray.buttons),
 			},

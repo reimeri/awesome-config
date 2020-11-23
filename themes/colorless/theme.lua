@@ -523,6 +523,8 @@ function theme:init()
 		mainmenu    = { 12, 10, 6, 6 },
 		layoutbox   = { 10, 10, 6, 6 },
 		textclock   = { 12, 12, 0, 0 },
+		keyboard	= { 6, 6, 4, 4 },
+		alsasound	= { 6, 6, 0, 0 },
 		taglist     = { 4, 4, 0, 0 },
 		tray        = { 10, 12, 7, 7 },
 		-- tasklist    = { 0, 70, 0, 0 }, -- centering tasklist widget
@@ -531,6 +533,14 @@ function theme:init()
 	-- Textclock
 	------------------------------------------------------------
 	self.widget.textclock = {
+		font    = self.fonts.clock,          -- font
+		tooltip = {},                        -- redflat tooltip style (see theme.float.tooltip)
+		color   = { text = self.color.icon } -- colors
+	}
+
+	-- Alsa sound
+	------------------------------------------------------------
+	self.widget.alsasound = {
 		font    = self.fonts.clock,          -- font
 		tooltip = {},                        -- redflat tooltip style (see theme.float.tooltip)
 		color   = { text = self.color.icon } -- colors
@@ -584,7 +594,7 @@ function theme:init()
 	-- Keyboard layout indicator
 	------------------------------------------------------------
 	self.widget.keyboard = {
-		icon         = self.icon.system,  -- widget icon
+		icon         = self.base .. "/widget/keyboard.svg",  -- widget icon
 		micon        = self.icon,         -- some common menu icons
 
 		-- list of colors associated with keyboard layouts
@@ -1518,5 +1528,6 @@ end
 -- End
 -----------------------------------------------------------------------------------------------------------------------
 theme:init()
+
 
 return theme
