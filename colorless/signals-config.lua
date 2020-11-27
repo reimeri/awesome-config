@@ -43,7 +43,7 @@ function signals:init(args)
 		"manage",
 		function(c)
 			-- put client at the end of list
-			if env.set_slave then awful.client.setslave(c) end
+			-- if env.set_slave then awful.client.setslave(c) end
 
 			-- startup placement
 			if awesome.startup
