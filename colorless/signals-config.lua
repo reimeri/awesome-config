@@ -31,6 +31,18 @@ local function fixed_maximized_geometry(c, context)
 	end
 end
 
+-- No border for maximized clients
+function border_adjust(c)
+	if #awful.screen.focused().clients == 1 then
+	--	lain.util.useless_gaps_set(0)
+		c.border_width = 0
+    elseif #awful.screen.focused().clients > 1 then
+        c.border_width = beautiful.border_width
+    --  c.border_color = beautiful.border_focus
+	--	lain.util.useless_gaps_set(2)
+    end
+end
+
 -- Build  table
 -----------------------------------------------------------------------------------------------------------------------
 function signals:init(args)
@@ -66,6 +78,8 @@ function signals:init(args)
 		function(c)
 			if not c.maximized then
 				c.border_width = beautiful.border_width
+			else
+				c.border_width = 0
 			end
 		end
 	)
@@ -83,8 +97,8 @@ function signals:init(args)
 	-- hilight border of focused window
 	-- can be disabled since focus indicated by titlebars in current config
 	if env.color_border_focus then
-		client.connect_signal("focus",   function(c) c.border_color = beautiful.border_focus end)
-		client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+		client.connect_signal("focus",   function(c) c.border_color = beautiful.border_focus border_adjust(c) end)
+		client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal border_adjust(c) end)
 	end
 
 	-- wallpaper update on screen geometry change
