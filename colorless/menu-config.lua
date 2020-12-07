@@ -35,7 +35,11 @@ function menu:init(args)
 
 	-- At worst, you can give up all applications widgets (appmenu, applauncher, appswitcher, qlaunch) in your config
 	-- local appmenu = redflat.service.dfparser.menu({ icons = icon_style, wm_name = "awesome" })
-
+			
+	local fileManagerMenu = {
+		{ "Ranger", function() awful.spawn(env.terminal .. " -title Ranger -e ranger ") end,           },
+		{ "Pcmanfm", function() awful.spawn("pcmanfm") end,           }
+	}
 	-- Main menu
 	------------------------------------------------------------
 	self.mainmenu = redflat.menu({ theme = theme,
@@ -43,8 +47,9 @@ function menu:init(args)
 			-- { "Applications",  appmenu,      },
 			{ "Terminal",      env.terminal, },
 			separator,
-			{ "Test Item 0", function() naughty.notify({ text = "Test menu 0" }) end,           },
-			{ "Test Item 1", function() naughty.notify({ text = "Test menu 1" }) end, key = "i" },
+			-- { "Test Item 0", function() naughty.notify({ text = "Test menu 0" }) end,           },
+			-- { "Test Item 1", function() naughty.notify({ text = "Test menu 1" }) end, key = "i" },
+			{"File managers", fileManagerMenu},
 			separator,
 			{ "Restart", awesome.restart, },
 			{ "Exit",    awesome.quit, },
