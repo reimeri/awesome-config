@@ -364,6 +364,10 @@ function hotkeys:init(args)
 			{ description = "Application launcher", group = "Widgets" }
 		},
 		{
+			{ env.mod }, "r", function() awful.spawn(env.terminal .. " -title Ranger -e ranger ") end,
+			{ description = "File manager", group = "Applications" }
+		},
+		{
 			{ env.mod }, "p", function() redflat.float.prompt:run() end,
 			{ description = "Show the prompt box", group = "Widgets" }
 		},
