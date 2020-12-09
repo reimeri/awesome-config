@@ -28,6 +28,7 @@ require("colorless.ercheck-config") -- load file with error handling
 -----------------------------------------------------------------------------------------------------------------------
 local env = require("colorless.env-config") -- load file with environment
 env:init()
+local bling = require("bling")
 
 
 -- Layouts setup
@@ -142,6 +143,17 @@ awful.screen.connect_for_each_screen(
 	function(s)
 		-- wallpaper
 		env.wallpaper(s)
+
+		bling.module.tiled_wallpaper("•", s, {        -- call the actual function ("x" is the string that will be tiled)
+			fg = "#aaaaaa",  -- define the foreground color
+			bg = "#202020",  -- define the background color
+			offset_y = 0,   -- set a y offset "•"
+			offset_x = -5,   -- set a x offset
+			font = "Hack",   -- set the font (without the size)
+			font_size = 20,  -- set the font size
+			padding = 100,   -- set padding (default is 100)
+			zickzack = true  -- rectangular pattern or criss cross
+		})
 
 		-- tags
 		awful.tag({ "Tag1", "Tag2", "Tag3", "Tag4", "Tag5" }, s, awful.layout.layouts[1])
