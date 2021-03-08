@@ -137,23 +137,25 @@ volume.buttons = awful.util.table.join(
 	awful.button({}, 9, function() redflat.float.player:action("Next")          end)
 )
 
+count = 1
 -- Screen setup
 -----------------------------------------------------------------------------------------------------------------------
 awful.screen.connect_for_each_screen(
 	function(s)
 		-- wallpaper
-		env.wallpaper(s)
+		env.wallpaper(s, count)
+		count = count + 1
 
-		bling.module.tiled_wallpaper("•", s, {        -- call the actual function ("x" is the string that will be tiled)
-			fg = "#aaaaaa",  -- define the foreground color
-			bg = "#202020",  -- define the background color
-			offset_y = 0,   -- set a y offset "•"
-			offset_x = -5,   -- set a x offset
-			font = "Hack",   -- set the font (without the size)
-			font_size = 20,  -- set the font size
-			padding = 100,   -- set padding (default is 100)
-			zickzack = true  -- rectangular pattern or criss cross
-		})
+		-- bling.module.tiled_wallpaper("•", s, {        -- call the actual function ("x" is the string that will be tiled)
+		-- 	fg = "#aaaaaa",  -- define the foreground color
+		-- 	bg = "#202020",  -- define the background color
+		-- 	offset_y = 0,   -- set a y offset "•"
+		-- 	offset_x = -5,   -- set a x offset
+		-- 	font = "Hack",   -- set the font (without the size)
+		-- 	font_size = 20,  -- set the font size
+		-- 	padding = 100,   -- set padding (default is 100)
+		-- 	zickzack = true  -- rectangular pattern or criss cross
+		-- })
 
 		-- tags
 		awful.tag({ "Tag1", "Tag2", "Tag3", "Tag4", "Tag5" }, s, awful.layout.layouts[1])

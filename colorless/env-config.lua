@@ -56,10 +56,10 @@ end
 
 -- Wallpaper setup
 --------------------------------------------------------------------------------
-env.wallpaper = function(s)
+env.wallpaper = function(s, count)
 	if beautiful.wallpaper then
-		if not env.desktop_autohide and awful.util.file_readable(beautiful.wallpaper) then
-			gears.wallpaper.maximized(beautiful.wallpaper, s, true)
+		if not env.desktop_autohide and awful.util.file_readable(beautiful.wallpaper[count]) then
+			gears.wallpaper.maximized(beautiful.wallpaper[count], s, false)
 		else
 			gears.wallpaper.set(beautiful.color.bg)
 		end
