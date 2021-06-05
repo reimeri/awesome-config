@@ -44,7 +44,7 @@ end
 
 local change_volume_default_args = {
 	down        = false,
-	step        = math.floor(65536 / 100 * 1 + 0.5),
+	step        = math.floor(100 / 100 * 1 + 0.5),
 	show_notify = false
 }
 
@@ -70,8 +70,8 @@ function pulse:change_volume(args)
 	local diff = args.down and -args.step or args.step
 
 	-- get current volume
-	local v = redutil.read.output(string.format("pacmd dump | grep 'set-%s-volume %s'", self._type, self._sink))
-	local parsed = string.match(v, "0x%x+")
+	local v = redutil.read.output("pactl list sinks | tr ' ' '\n' | grep -m1 '%' | tr -d '%'")
+	local parsed = v
 
 	-- catch possible problems with pacmd output
 	if not parsed then
@@ -84,22 +84,22 @@ function pulse:change_volume(args)
 	-- calculate new volume
 	local new_volume = volume + diff
 
-	if new_volume > 65536 then
-		new_volume = 65536
+	if new_volume > 100 then
+		new_volume = 100
 	elseif new_volume < 0 then
 		new_volume = 0
 	end
 
 	-- show notify if need
 	if args.show_notify then
-		local vol = new_volume / 65536
+		local vol = new_volume / 100
 		rednotify:show(
 			redutil.table.merge({ value = vol, text = string.format('%.0f', vol*100) .. "%" }, self._style.notify)
 		)
 	end
 
 	-- set new volume
-	awful.spawn(string.format("pacmd set-%s-volume %s %s", self._type, self._sink, new_volume))
+	awful.spawn(string.format("pactl set-sink-volume alsa_output.pci-0000_10_00.4.analog-stereo %s%%", new_volume))
 
 	-- update volume indicators
 	self:update_volume()
@@ -126,21 +126,18 @@ end
 -----------------------------------------------------------------------------------------------------------------------
 function pulse:update_volume(args)
 	args = args or {}
-	if args.sink_update then
-		self._sink = get_default_sink({ type = self._type })
-	end
-	if not self._type or not self._sink then return end
 
 	-- initialize vars
-	local volmax = 65536
+	local volmax = 100
 	local volume = 0
 
 	-- get current volume and mute state
-	local v = redutil.read.output(string.format("pacmd dump | grep 'set-%s-volume %s'", self._type, self._sink))
-	local m = redutil.read.output(string.format("pacmd dump | grep 'set-%s-mute %s'", self._type, self._sink))
+	local v = redutil.read.output("pactl list sinks | tr ' ' '\n' | grep -m1 '%' | tr -d '%'")
+	--local m = redutil.read.output(string.format("pacmd dump | grep 'set-%s-mute %s'", self._type, self._sink))
+	local m = "no"
 
 	if v then
-		local pv = string.match(v, "0x%x+")
+		local pv = v
 		if pv then volume = math.floor(tonumber(pv) * 100 / volmax + 0.5) end
 	end
 
