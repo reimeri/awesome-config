@@ -99,6 +99,7 @@ function pulse:change_volume(args)
 	end
 
 	-- set new volume
+	-- HARD CODED
 	awful.spawn(string.format("pactl set-sink-volume alsa_output.pci-0000_10_00.4.analog-stereo %s%%", new_volume))
 
 	-- update volume indicators
