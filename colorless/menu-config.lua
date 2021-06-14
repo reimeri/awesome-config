@@ -37,7 +37,7 @@ function menu:init(args)
 	-- local appmenu = redflat.service.dfparser.menu({ icons = icon_style, wm_name = "awesome" })
 			
 	local fileManagerMenu = {
-		{ "Ranger", function() awful.spawn(env.terminal .. " -title Ranger -e ranger ") end,           },
+		{ "Ranger", function() awful.spawn(env.terminal .. " start ranger ") end,           },
 		{ "Pcmanfm", function() awful.spawn("pcmanfm") end,           }
 	}
 	-- Main menu

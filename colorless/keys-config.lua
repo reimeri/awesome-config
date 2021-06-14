@@ -364,7 +364,7 @@ function hotkeys:init(args)
 			{ description = "Application launcher", group = "Widgets" }
 		},
 		{
-			{ env.mod }, "r", function() awful.spawn(env.terminal .. " -title Ranger -e ranger ") end,
+			{ env.mod }, "r", function() awful.spawn(env.terminal .. " start ranger ") end,
 			{ description = "File manager", group = "Applications" }
 		},
 		{

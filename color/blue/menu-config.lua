@@ -35,7 +35,7 @@ function menu:init(args)
 	end
 
 	-- extra commands
-	local ranger_comm = env.terminal .. " -e ranger"
+	local ranger_comm = env.terminal .. " start ranger"
 
 	-- Application submenu
 	------------------------------------------------------------
