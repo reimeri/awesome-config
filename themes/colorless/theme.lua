@@ -50,7 +50,7 @@ theme.useless_gap         = 0  -- useless gap
 theme.cellnum = { x = 96, y = 58 } -- grid layout property
 
 --theme.wallpaper = theme.path .. "/wallpaper/primary.png" -- wallpaper file
-theme.wallpaper = {"/home/toor/Pictures/Wallpapers/Character/Satania_christmas_UW.png", "/home/toor/Pictures/Wallpapers/Misc/chinese_1440p.png"} -- wallpaper file
+theme.wallpaper = {"/home/toor/Pictures/Wallpapers/Character/Satania_christmas_UW.png", "/home/toor/Pictures/Wallpapers/Misc/chinese_dark_1440p.png"} -- wallpaper file
 
 -- Fonts
 ------------------------------------------------------------
