@@ -316,7 +316,27 @@ function hotkeys:init(args)
 
 	-- Global keys
 	--------------------------------------------------------------------------------
+
+	-- Set ranger command for different terminals. Default is urxvt
+	local ranger = {
+		{ env.mod }, "r", function() awful.spawn(env.terminal .. " -e ranger ") end,
+		{ description = "File manager", group = "Applications" }
+	}
+	
+	if env.terminal == "wezterm" then
+		ranger = {
+			{ env.mod }, "r", function() awful.spawn(env.terminal .. " start ranger ") end,
+			{ description = "File manager", group = "Applications" }
+		}
+	elseif env.terminal == "alacritty" then
+		ranger = {
+			{ env.mod }, "r", function() awful.spawn(env.terminal .. " -e ranger ") end,
+			{ description = "File manager", group = "Applications" }
+		}
+	end
+
 	self.raw.root = {
+		ranger,
 		{
 			{ env.mod }, "F1", function() redtip:show() end,
 			{ description = "Show hotkeys helper", group = "Main" }
@@ -362,10 +382,6 @@ function hotkeys:init(args)
 		{
 			{ env.mod }, "space", function() os.execute("rofi -show run") end,
 			{ description = "Application launcher", group = "Widgets" }
-		},
-		{
-			{ env.mod }, "r", function() awful.spawn(env.terminal .. " start ranger ") end,
-			{ description = "File manager", group = "Applications" }
 		},
 		{
 			{ env.mod }, "p", function() redflat.float.prompt:run() end,
